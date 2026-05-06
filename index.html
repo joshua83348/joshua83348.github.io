@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stumpy's Stump Grinding LLC — Jacksonville, FL</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Black+Ops+One&family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-dark:  #1a3a0a;
+    --green-mid:   #2d6a10;
+    --green-main:  #3a7d14;
+    --gold:        #f0b429;
+    --gold-light:  #fdd663;
+    --black:       #0e0e0e;
+    --white:       #f8f5ee;
+    --bark:        #4a3520;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--green-dark);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='none'/%3E%3Ccircle cx='1' cy='1' r='0.4' fill='rgba(0,0,0,0.18)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(14,14,14,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    height: 56px;
+  }
+
+  .nav-brand {
+    font-family: 'Black Ops One', sans-serif;
+    font-size: 18px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-cta {
+    background: var(--gold);
+    color: var(--black) !important;
+    padding: 8px 18px;
+    border-radius: 3px;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--gold-light) !important; color: var(--black) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 100px 24px 60px;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(58,125,20,0.5) 0%, transparent 70%),
+      var(--green-dark);
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 80px;
+    background: linear-gradient(to bottom right, transparent 49%, var(--green-dark) 50%);
+  }
+
+  .hero-eyebrow {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.1s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(52px, 10vw, 100px);
+    line-height: 0.95;
+    color: var(--gold);
+    text-shadow: 4px 4px 0 var(--green-dark), 6px 6px 0 rgba(0,0,0,0.4);
+    letter-spacing: 2px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.2s forwards;
+  }
+
+  .hero-subtitle {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(20px, 4vw, 32px);
+    font-weight: 700;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-top: 8px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.35s forwards;
+  }
+
+  .hero-divider {
+    width: 120px;
+    height: 3px;
+    background: var(--gold);
+    margin: 28px auto;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.45s forwards;
+  }
+
+  .hero-tagline {
+    font-size: 18px;
+    color: rgba(248,245,238,0.8);
+    letter-spacing: 0.5px;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.55s forwards;
+  }
+
+  .hero-badges {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 44px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.65s forwards;
+  }
+
+  .badge {
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 1.5px solid var(--gold);
+    color: var(--gold);
+    padding: 6px 14px;
+    border-radius: 2px;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.75s forwards;
+  }
+
+  .btn-primary {
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: var(--gold);
+    color: var(--black);
+    padding: 16px 36px;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: transform 0.15s, background 0.2s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  .btn-secondary {
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--white);
+    border: 2px solid rgba(248,245,238,0.4);
+    padding: 16px 36px;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+
+  .btn-secondary:hover { border-color: var(--white); transform: translateY(-2px); }
+
+  /* ── SERVICES ── */
+  .services {
+    position: relative;
+    z-index: 1;
+    background: var(--green-dark);
+    padding: 80px 24px;
+  }
+
+  .section-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Black Ops One', sans-serif;
+    font-size: clamp(32px, 5vw, 52px);
+    text-align: center;
+    color: var(--white);
+    margin-bottom: 52px;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2px;
+    max-width: 960px;
+    margin: 0 auto;
+    border: 2px solid var(--gold);
+  }
+
+  .service-card {
+    background: var(--green-mid);
+    padding: 40px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.2s;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: var(--gold);
+    transform: scaleY(0);
+    transition: transform 0.25s;
+    transform-origin: bottom;
+  }
+
+  .service-card:hover { background: rgba(58,125,20,0.9); }
+  .service-card:hover::before { transform: scaleY(1); }
+
+  .service-icon {
+    font-size: 36px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .service-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .service-desc {
+    font-size: 15px;
+    color: rgba(248,245,238,0.75);
+    line-height: 1.6;
+  }
+
+  /* ── WHY US ── */
+  .why {
+    background: var(--black);
+    padding: 80px 24px;
+    position: relative;
+  }
+
+  .why-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-top: 52px;
+  }
+
+  @media (max-width: 640px) {
+    .why-grid { grid-template-columns: 1fr; gap: 28px; }
+    .nav-links { display: none; }
+  }
+
+  .why-item { text-align: center; }
+
+  .why-number {
+    font-family: 'Black Ops One', sans-serif;
+    font-size: 56px;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .why-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .why-desc {
+    font-size: 14px;
+    color: rgba(248,245,238,0.55);
+    line-height: 1.6;
+  }
+
+  /* ── CONTACT ── */
+  .contact {
+    background: var(--green-dark);
+    padding: 80px 24px;
+  }
+
+  .contact-inner {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .phone-display {
+    font-family: 'Black Ops One', sans-serif;
+    font-size: clamp(36px, 7vw, 64px);
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-decoration: none;
+    display: block;
+    margin: 20px 0;
+    transition: color 0.2s;
+  }
+
+  .phone-display:hover { color: var(--gold-light); }
+
+  .contact-form {
+    margin-top: 48px;
+    text-align: left;
+  }
+
+  .contact-form h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 24px;
+    text-align: center;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  @media (max-width: 560px) { .form-row { grid-template-columns: 1fr; } }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(248,245,238,0.6);
+  }
+
+  input, textarea, select {
+    background: rgba(255,255,255,0.06);
+    border: 1.5px solid rgba(240,180,41,0.3);
+    color: var(--white);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 16px;
+    padding: 12px 16px;
+    border-radius: 3px;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    width: 100%;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--gold);
+    background: rgba(255,255,255,0.1);
+  }
+
+  textarea { min-height: 120px; resize: vertical; }
+
+  select option { background: var(--green-dark); }
+
+  .form-submit {
+    width: 100%;
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: var(--gold);
+    color: var(--black);
+    border: none;
+    padding: 18px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .form-submit:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  .form-note {
+    text-align: center;
+    font-size: 13px;
+    color: rgba(248,245,238,0.4);
+    margin-top: 12px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black);
+    border-top: 2px solid rgba(240,180,41,0.3);
+    padding: 32px 24px;
+    text-align: center;
+  }
+
+  footer .footer-brand {
+    font-family: 'Black Ops One', sans-serif;
+    font-size: 22px;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  footer p {
+    font-size: 13px;
+    color: rgba(248,245,238,0.4);
+    line-height: 1.8;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── THANK YOU STATE ── */
+  #thank-you {
+    display: none;
+    background: rgba(58,125,20,0.2);
+    border: 1.5px solid var(--gold);
+    border-radius: 4px;
+    padding: 32px;
+    text-align: center;
+    margin-top: 24px;
+  }
+
+  #thank-you h3 {
+    font-family: 'Black Ops One', sans-serif;
+    font-size: 28px;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  #thank-you p { color: rgba(248,245,238,0.75); font-size: 16px; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#">Stumpy's</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a class="nav-cta" href="tel:3866906768">Call Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+
+
+  <p class="hero-eyebrow">Jacksonville & Surrounding Areas</p>
+  <h1 class="hero-title">Stumpy's</h1>
+  <p class="hero-subtitle">Stump Grinding LLC</p>
+  <div class="hero-divider"></div>
+  <p class="hero-tagline">Fast · Reliable · Professional · Free Estimates</p>
+  <div class="hero-badges">
+    <span class="badge">Licensed</span>
+    <span class="badge">Insured</span>
+    <span class="badge">Residential</span>
+    <span class="badge">Commercial</span>
+  </div>
+  <div class="hero-cta-group">
+    <a class="btn-primary" href="tel:3866906768">(386) 690-6768</a>
+    <a class="btn-secondary" href="#contact">Request Estimate</a>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <p class="section-label reveal">What we do</p>
+  <h2 class="section-title reveal">Services</h2>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <span class="service-icon">🪵</span>
+      <p class="service-name">Stump Grinding</p>
+      <p class="service-desc">Complete stump removal ground below grade. No mess left behind — clean, fast, and affordable for any size stump.</p>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-icon">🌿</span>
+      <p class="service-name">Land Clearing</p>
+      <p class="service-desc">Clearing stumps and debris for new construction, landscaping projects, or reclaiming overgrown property.</p>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-icon">🏠</span>
+      <p class="service-name">Residential</p>
+      <p class="service-desc">Homeowners trust us to protect their yards. We work carefully around landscaping, irrigation, and structures.</p>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-icon">🏗️</span>
+      <p class="service-name">Commercial</p>
+      <p class="service-desc">Large lots, HOAs, municipalities, and contractors — we have the equipment and experience for commercial-scale jobs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why" id="why">
+  <div class="why-inner">
+    <p class="section-label reveal">Why Stumpy's</p>
+    <h2 class="section-title reveal">Owner-Operated. No Middleman.</h2>
+    <div class="why-grid">
+      <div class="why-item reveal">
+        <p class="why-number">$0</p>
+        <p class="why-label">Estimate fee</p>
+        <p class="why-desc">Free quotes, always. No pressure, no obligation.</p>
+      </div>
+      <div class="why-item reveal">
+        <p class="why-number">1</p>
+        <p class="why-label">Call away</p>
+        <p class="why-desc">You talk directly to Joshua — the guy doing the work.</p>
+      </div>
+      <div class="why-item reveal">
+        <p class="why-number">✓</p>
+        <p class="why-label">L &amp; I</p>
+        <p class="why-desc">Licensed and insured for your protection and peace of mind.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <p class="section-label reveal">Get in touch</p>
+    <h2 class="section-title reveal">Free Estimate</h2>
+    <p class="reveal" style="color:rgba(248,245,238,0.65);margin-bottom:8px;">Call or text us directly</p>
+    <a class="phone-display reveal" href="tel:3866906768">(386) 690-6768</a>
+    <p class="reveal" style="color:rgba(248,245,238,0.4);font-size:14px;margin-bottom:0;">Joshua McGuire · Owner/Operator</p>
+
+    <div class="contact-form reveal">
+      <h3>Or send a message</h3>
+      <form id="estimate-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Your name</label>
+            <input type="text" id="name" placeholder="John Smith" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone number</label>
+            <input type="tel" id="phone" placeholder="(904) 555-1234" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="service">Service needed</label>
+          <select id="service">
+            <option value="">Select a service...</option>
+            <option>Stump Grinding</option>
+            <option>Land Clearing</option>
+            <option>Not sure — need a quote</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Job details</label>
+          <textarea id="message" placeholder="Tell us about the stumps — how many, approximate size, location on property..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Request My Free Estimate</button>
+        <p class="form-note">We'll get back to you within 24 hours</p>
+      </form>
+      <div id="thank-you">
+        <h3>Got it!</h3>
+        <p>Thanks for reaching out. Joshua will be in touch shortly to set up your free estimate.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-brand">Stumpy's Stump Grinding LLC</p>
+  <p>
+    Proudly serving Jacksonville and surrounding areas<br>
+    Licensed &amp; Insured · Free Estimates<br>
+    <a href="tel:3866906768" style="color:var(--gold);text-decoration:none;">(386) 690-6768</a>
+  </p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Form submit (static — no backend yet)
+  document.getElementById('estimate-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    this.style.display = 'none';
+    document.getElementById('thank-you').style.display = 'block';
+  });
+</script>
+</body>
+</html>
