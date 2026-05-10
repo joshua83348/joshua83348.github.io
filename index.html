@@ -543,6 +543,7 @@
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
     <li><a href="#why">About</a></li>
+    <li><a href="pricer.html">Get Estimate</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a class="nav-cta" href="tel:3866906768">Call Now</a></li>
   </ul>
@@ -633,20 +634,21 @@
 
     <div class="contact-form reveal">
       <h3>Or send a message</h3>
-      <form id="estimate-form">
+      <form id="estimate-form" action="https://formspree.io/f/xgodpryb" method="POST">
+        <input type="hidden" name="_subject" value="New Contact — Stumpy's Stump Grinding">
         <div class="form-row">
           <div class="form-group">
             <label for="name">Your name</label>
-            <input type="text" id="name" placeholder="John Smith" required>
+            <input type="text" id="name" name="Name" placeholder="John Smith" required>
           </div>
           <div class="form-group">
             <label for="phone">Phone number</label>
-            <input type="tel" id="phone" placeholder="(904) 555-1234" required>
+            <input type="tel" id="phone" name="Phone" placeholder="(904) 555-1234" required>
           </div>
         </div>
         <div class="form-group">
           <label for="service">Service needed</label>
-          <select id="service">
+          <select id="service" name="Service">
             <option value="">Select a service...</option>
             <option>Stump Grinding</option>
             <option>Land Clearing</option>
@@ -655,7 +657,7 @@
         </div>
         <div class="form-group">
           <label for="message">Job details</label>
-          <textarea id="message" placeholder="Tell us about the stumps — how many, approximate size, location on property..."></textarea>
+          <textarea id="message" name="Message" placeholder="Tell us about the stumps — how many, approximate size, location on property..."></textarea>
         </div>
         <button type="submit" class="form-submit">Request My Free Estimate</button>
         <p class="form-note">We'll get back to you within 24 hours</p>
@@ -691,11 +693,23 @@
   }, { threshold: 0.12 });
   reveals.forEach(el => observer.observe(el));
 
-  // Form submit (static — no backend yet)
+  // Form submit via Formspree
   document.getElementById('estimate-form').addEventListener('submit', function(e) {
     e.preventDefault();
-    this.style.display = 'none';
-    document.getElementById('thank-you').style.display = 'block';
+    fetch(this.action, {
+      method: 'POST',
+      body: new FormData(this),
+      headers: { 'Accept': 'application/json' }
+    }).then(res => {
+      if (res.ok) {
+        this.style.display = 'none';
+        document.getElementById('thank-you').style.display = 'block';
+      } else {
+        alert('Something went wrong. Please try again or call us at (386) 690-6768.');
+      }
+    }).catch(() => {
+      alert('Something went wrong. Please try again or call us at (386) 690-6768.');
+    });
   });
 </script>
 </body>
