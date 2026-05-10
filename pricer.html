@@ -488,6 +488,7 @@
         <div class="form-group">
           <label for="cust-phone">Phone Number</label>
           <input type="tel" id="cust-phone" name="Phone" placeholder="(904) 555-1234" required>
+          <span id="phone-error" style="color:#ff6b6b;font-size:12px;display:none;">Please enter a complete 10-digit phone number.</span>
         </div>
       </div>
 
@@ -520,7 +521,7 @@
     </form>
     <div class="thank-you" id="thank-you">
       <h3>Request Sent!</h3>
-      <p>Joshua will review your stump list and reach out within 24 hours to confirm your appointment.</p>
+      <p>Stumpy will review your stump list and reach out within 24 hours to confirm your appointment.</p>
     </div>
   </div>
 
@@ -644,15 +645,31 @@
   }
 
   // Phone auto-format
-  document.getElementById('cust-phone').addEventListener('input', function(e) {
+  const phoneInput = document.getElementById('cust-phone');
+  const phoneError = document.getElementById('phone-error');
+
+  phoneInput.addEventListener('input', function(e) {
     let v = e.target.value.replace(/\D/g, '').slice(0, 10);
     if (v.length >= 7) v = '(' + v.slice(0,3) + ') ' + v.slice(3,6) + '-' + v.slice(6);
     else if (v.length >= 4) v = '(' + v.slice(0,3) + ') ' + v.slice(3);
     else if (v.length > 0) v = '(' + v;
     e.target.value = v;
+    phoneError.style.display = 'none';
+  });
+
+  phoneInput.addEventListener('blur', function() {
+    const digits = phoneInput.value.replace(/\D/g, '');
+    phoneError.style.display = digits.length > 0 && digits.length < 10 ? 'block' : 'none';
   });
 
   document.getElementById('estimate-form').addEventListener('submit', function(e) {
+    const digits = phoneInput.value.replace(/\D/g, '');
+    if (digits.length !== 10) {
+      e.preventDefault();
+      phoneError.style.display = 'block';
+      phoneInput.focus();
+      return;
+    }
     e.preventDefault();
     fetch(this.action, {
       method: 'POST',
