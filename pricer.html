@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get an Estimate — Stumpy's Stump Grinding LLC</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Black+Ops+One&family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-dark:  #1a3a0a;
+    --green-mid:   #2d6a10;
+    --green-main:  #3a7d14;
+    --gold:        #f0b429;
+    --gold-light:  #fdd663;
+    --black:       #0e0e0e;
+    --white:       #f8f5ee;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--green-dark);
+    color: var(--white);
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='none'/%3E%3Ccircle cx='1' cy='1' r='0.4' fill='rgba(0,0,0,0.18)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(14,14,14,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    height: 56px;
+  }
+
+  .nav-brand {
+    font-family: 'Black Ops One', sans-serif;
+    font-size: 18px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    text-decoration: none;
+  }
+
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+
+  .nav-links a {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-cta {
+    background: var(--gold);
+    color: var(--black) !important;
+    padding: 8px 18px;
+    border-radius: 3px;
+  }
+
+  .nav-cta:hover { background: var(--gold-light) !important; }
+
+  .page-header {
+    position: relative;
+    z-index: 1;
+    padding: 110px 24px 52px;
+    text-align: center;
+    background: radial-gradient(ellipse at 50% 0%, rgba(58,125,20,0.4) 0%, transparent 70%);
+  }
+
+  .page-eyebrow {
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .page-title {
+    font-family: 'Black Ops One', sans-serif;
+    font-size: clamp(30px, 6vw, 52px);
+    color: var(--white);
+    margin-bottom: 14px;
+  }
+
+  .page-subtitle {
+    font-size: 16px;
+    color: rgba(248,245,238,0.6);
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .gold-rule { width: 80px; height: 3px; background: var(--gold); margin: 24px auto 0; }
+
+  .main-wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  .section-tag {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .add-card {
+    background: var(--green-mid);
+    border: 2px solid rgba(240,180,41,0.3);
+    border-radius: 4px;
+    padding: 28px;
+    margin-bottom: 20px;
+  }
+
+  .input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  @media (max-width: 480px) { .input-row { grid-template-columns: 1fr; } }
+
+  .input-group { display: flex; flex-direction: column; gap: 6px; }
+
+  .input-group label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(248,245,238,0.5);
+  }
+
+  .input-group input,
+  .input-group select {
+    background: rgba(255,255,255,0.06);
+    border: 1.5px solid rgba(240,180,41,0.3);
+    color: var(--white);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 16px;
+    padding: 11px 14px;
+    border-radius: 3px;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    width: 100%;
+  }
+
+  .input-group input:focus,
+  .input-group select:focus {
+    border-color: var(--gold);
+    background: rgba(255,255,255,0.1);
+  }
+
+  .input-group select option { background: var(--green-dark); }
+
+  #other-name-wrap { margin-bottom: 14px; display: none; }
+
+  .btn-add-stump {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: var(--gold);
+    color: var(--black);
+    border: none;
+    padding: 13px 24px;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-add-stump:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .btn-add-stump:disabled { opacity: 0.38; cursor: not-allowed; transform: none; }
+
+  .stump-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
+
+  .empty-state {
+    text-align: center;
+    padding: 20px 0;
+    color: rgba(248,245,238,0.25);
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  .stump-item {
+    background: rgba(45,106,16,0.35);
+    border: 1.5px solid rgba(240,180,41,0.2);
+    border-radius: 3px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    animation: slideIn 0.22s ease forwards;
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .stump-info { flex: 1; }
+
+  .stump-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 2px;
+  }
+
+  .stump-range { font-size: 15px; color: var(--gold); font-weight: 600; }
+
+  .btn-remove {
+    background: transparent;
+    border: none;
+    color: rgba(248,245,238,0.3);
+    font-size: 22px;
+    line-height: 1;
+    padding: 0 4px;
+    cursor: pointer;
+    transition: color 0.2s;
+    flex-shrink: 0;
+  }
+
+  .btn-remove:hover { color: var(--gold); }
+
+  .total-box {
+    background: rgba(0,0,0,0.25);
+    border: 2px solid var(--gold);
+    border-radius: 4px;
+    padding: 28px 32px;
+    text-align: center;
+    margin-bottom: 36px;
+    display: none;
+  }
+
+  .total-box.visible { display: block; }
+
+  .total-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: rgba(248,245,238,0.45);
+    margin-bottom: 8px;
+  }
+
+  .total-range {
+    font-family: 'Black Ops One', sans-serif;
+    font-size: clamp(34px, 8vw, 56px);
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .total-count { font-size: 13px; color: rgba(248,245,238,0.38); margin-bottom: 6px; }
+  .total-note { font-size: 12px; color: rgba(248,245,238,0.35); line-height: 1.6; }
+
+  .request-card {
+    background: var(--green-mid);
+    border: 2px solid rgba(240,180,41,0.3);
+    border-radius: 4px;
+    padding: 28px;
+    display: none;
+  }
+
+  .request-card.visible { display: block; }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  @media (max-width: 500px) { .form-row { grid-template-columns: 1fr; } }
+
+  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+
+  .form-group label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(248,245,238,0.5);
+  }
+
+  .form-group input,
+  .form-group textarea {
+    background: rgba(255,255,255,0.06);
+    border: 1.5px solid rgba(240,180,41,0.3);
+    color: var(--white);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 16px;
+    padding: 11px 14px;
+    border-radius: 3px;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    width: 100%;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: var(--gold);
+    background: rgba(255,255,255,0.1);
+  }
+
+  .form-group textarea { min-height: 80px; resize: vertical; }
+
+  .btn-submit {
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    background: var(--gold);
+    color: var(--black);
+    border: none;
+    padding: 16px;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 6px;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-submit:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  .form-note {
+    text-align: center;
+    font-size: 12px;
+    color: rgba(248,245,238,0.3);
+    margin-top: 10px;
+  }
+
+  .thank-you {
+    display: none;
+    background: rgba(58,125,20,0.18);
+    border: 1.5px solid var(--gold);
+    border-radius: 4px;
+    padding: 36px;
+    text-align: center;
+    margin-top: 24px;
+  }
+
+  .thank-you h3 {
+    font-family: 'Black Ops One', sans-serif;
+    font-size: 28px;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .thank-you p { color: rgba(248,245,238,0.7); font-size: 16px; line-height: 1.6; }
+
+  footer {
+    background: var(--black);
+    border-top: 2px solid rgba(240,180,41,0.3);
+    padding: 32px 24px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-brand {
+    font-family: 'Black Ops One', sans-serif;
+    font-size: 20px;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  footer p { font-size: 13px; color: rgba(248,245,238,0.4); line-height: 1.8; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">Stumpy's</a>
+  <ul class="nav-links">
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="index.html#why">About</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a class="nav-cta" href="tel:3866906768">Call Now</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <p class="page-eyebrow">Stumpy's Stump Grinding LLC</p>
+  <h1 class="page-title">Estimate Your Job</h1>
+  <p class="page-subtitle">Add each stump below to build your estimate, then submit your info — no phone call required.</p>
+  <div class="gold-rule"></div>
+</div>
+
+<div class="main-wrap">
+
+  <span class="section-tag">Step 1 — Add Your Stumps</span>
+
+  <div class="add-card">
+    <div class="input-row">
+      <div class="input-group">
+        <label for="diameter">Diameter (inches)</label>
+        <input type="number" id="diameter" placeholder="e.g. 18" min="1" max="120">
+      </div>
+      <div class="input-group">
+        <label for="tree-type">Tree Type</label>
+        <select id="tree-type">
+          <option value="">Select type...</option>
+          <option value="oak">Oak</option>
+          <option value="palm">Palm</option>
+          <option value="pine">Pine</option>
+          <option value="magnolia">Magnolia</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+    </div>
+    <div class="input-group" id="other-name-wrap">
+      <label for="other-name">What kind of tree?</label>
+      <input type="text" id="other-name" placeholder="e.g. Cypress, Hickory...">
+    </div>
+    <button class="btn-add-stump" id="btn-add" disabled>+ Add This Stump</button>
+  </div>
+
+  <div class="stump-list" id="stump-list">
+    <div class="empty-state" id="empty-state">No stumps added yet</div>
+  </div>
+
+  <div class="total-box" id="total-box">
+    <p class="total-label">Estimated Total Range</p>
+    <p class="total-range" id="total-range-display">—</p>
+    <p class="total-count" id="total-count-label"></p>
+    <p class="total-note">Final price depends on root depth, site access, and other on-site conditions.</p>
+  </div>
+
+  <div class="request-card" id="request-card">
+    <span class="section-tag">Step 2 — Submit Your Request</span>
+    <form id="estimate-form" action="https://formspree.io/f/xgodpryb" method="POST">
+      <input type="hidden" name="_subject" value="New Estimate Request — Stumpy's Stump Grinding">
+      <input type="hidden" name="Stump Details" id="stump-data-field">
+      <input type="hidden" name="Estimated Range" id="estimate-range-field">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="cust-name">Your Name</label>
+          <input type="text" id="cust-name" name="Name" placeholder="John Smith" required>
+        </div>
+        <div class="form-group">
+          <label for="cust-phone">Phone Number</label>
+          <input type="tel" id="cust-phone" name="Phone" placeholder="(904) 555-1234" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="cust-address">Property Address</label>
+        <input type="text" id="cust-address" name="Address" placeholder="123 Main St, Jacksonville, FL" required>
+      </div>
+
+      <div class="form-group">
+        <label for="cust-notes">Anything else we should know? (optional)</label>
+        <textarea id="cust-notes" name="Notes" placeholder="Gate code, dogs in yard, tricky access — anything helpful..."></textarea>
+      </div>
+
+      <button type="submit" class="btn-submit">Send My Estimate Request</button>
+      <p class="form-note">We'll get back to you within 24 hours to confirm.</p>
+    </form>
+    <div class="thank-you" id="thank-you">
+      <h3>Request Sent!</h3>
+      <p>Joshua will review your stump list and reach out within 24 hours to confirm your appointment.</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p class="footer-brand">Stumpy's Stump Grinding LLC</p>
+  <p>
+    Proudly serving Jacksonville and surrounding areas<br>
+    Licensed &amp; Insured · Free Estimates<br>
+    <a href="tel:3866906768" style="color:var(--gold);text-decoration:none;">(386) 690-6768</a>
+  </p>
+</footer>
+
+<script>
+  const diamInput  = document.getElementById('diameter');
+  const typeSelect = document.getElementById('tree-type');
+  const otherWrap  = document.getElementById('other-name-wrap');
+  const otherInput = document.getElementById('other-name');
+  const btnAdd     = document.getElementById('btn-add');
+  const listEl     = document.getElementById('stump-list');
+  const emptyEl    = document.getElementById('empty-state');
+  const totalBox   = document.getElementById('total-box');
+  const totalDisp  = document.getElementById('total-range-display');
+  const countLabel = document.getElementById('total-count-label');
+  const reqCard    = document.getElementById('request-card');
+  const stumpField = document.getElementById('stump-data-field');
+  const rangeField = document.getElementById('estimate-range-field');
+
+  let stumps = [];
+
+  typeSelect.addEventListener('change', () => {
+    otherWrap.style.display = typeSelect.value === 'other' ? 'block' : 'none';
+    validate();
+  });
+  diamInput.addEventListener('input', validate);
+  otherInput.addEventListener('input', validate);
+
+  function validate() {
+    const d = parseInt(diamInput.value);
+    const t = typeSelect.value;
+    btnAdd.disabled = !(d > 0 && d <= 120 && t !== '' &&
+      (t !== 'other' || otherInput.value.trim() !== ''));
+  }
+
+  function computeRange(diameter, treeCode) {
+    const weights = { oak: 11, palm: 5, pine: 3, magnolia: 7, other: 13 };
+    const wc = weights[treeCode] || 13;
+    const heavy = ['oak', 'magnolia', 'other'].includes(treeCode);
+    const base = Math.max(125, diameter * (heavy ? 14 : 7));
+    const seed = ((diameter * 37 + wc * 53 + diameter * wc * 7) % 89) / 89;
+    const spread = 0.16 + seed * 0.10;
+    const bias   = 0.28 + seed * 0.40;
+    return {
+      lo: Math.round((base - base * spread * bias) / 5) * 5,
+      hi: Math.round((base + base * spread * (1 - bias)) / 5) * 5
+    };
+  }
+
+  btnAdd.addEventListener('click', () => {
+    const d    = parseInt(diamInput.value);
+    const type = typeSelect.value;
+    const name = type === 'other'
+      ? (otherInput.value.trim() || 'Other')
+      : type.charAt(0).toUpperCase() + type.slice(1);
+    const { lo, hi } = computeRange(d, type);
+    stumps.push({ diameter: d, type, name, lo, hi });
+    renderList();
+    resetInputs();
+  });
+
+  function resetInputs() {
+    diamInput.value = '';
+    typeSelect.value = '';
+    otherInput.value = '';
+    otherWrap.style.display = 'none';
+    btnAdd.disabled = true;
+  }
+
+  function renderList() {
+    listEl.innerHTML = '';
+    if (stumps.length === 0) {
+      listEl.appendChild(emptyEl);
+      totalBox.classList.remove('visible');
+      reqCard.classList.remove('visible');
+      return;
+    }
+
+    stumps.forEach((s, i) => {
+      const el = document.createElement('div');
+      el.className = 'stump-item';
+      el.innerHTML = `
+        <div class="stump-info">
+          <p class="stump-label">${s.name} &middot; ${s.diameter}&Prime; diameter</p>
+          <p class="stump-range">$${s.lo.toLocaleString()} &ndash; $${s.hi.toLocaleString()}</p>
+        </div>
+        <button class="btn-remove" data-i="${i}">&times;</button>`;
+      listEl.appendChild(el);
+    });
+
+    listEl.querySelectorAll('.btn-remove').forEach(btn => {
+      btn.addEventListener('click', () => {
+        stumps.splice(parseInt(btn.dataset.i), 1);
+        renderList();
+      });
+    });
+
+    const totalLo = stumps.reduce((a, s) => a + s.lo, 0);
+    const totalHi = stumps.reduce((a, s) => a + s.hi, 0);
+    const n = stumps.length;
+
+    totalDisp.textContent = `$${totalLo.toLocaleString()} \u2013 $${totalHi.toLocaleString()}`;
+    countLabel.textContent = `${n} stump${n !== 1 ? 's' : ''}`;
+    totalBox.classList.add('visible');
+    reqCard.classList.add('visible');
+
+    stumpField.value = stumps.map((s, i) =>
+      `Stump ${i+1}: ${s.name}, ${s.diameter}" — $${s.lo}–$${s.hi}`
+    ).join(' | ');
+    rangeField.value = `$${totalLo.toLocaleString()} – $${totalHi.toLocaleString()} (${n} stump${n !== 1 ? 's' : ''})`;
+  }
+
+  document.getElementById('estimate-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    fetch(this.action, {
+      method: 'POST',
+      body: new FormData(this),
+      headers: { 'Accept': 'application/json' }
+    }).then(res => {
+      if (res.ok) {
+        this.style.display = 'none';
+        document.getElementById('thank-you').style.display = 'block';
+      } else {
+        alert('Something went wrong. Please try again or call us at (386) 690-6768.');
+      }
+    }).catch(() => {
+      alert('Something went wrong. Please try again or call us at (386) 690-6768.');
+    });
+  });
+</script>
+</body>
+</html>
